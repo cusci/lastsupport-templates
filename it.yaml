@@ -1,0 +1,617 @@
+welcome: |
+  🔸 @LastSupportBot v{{version}}.
+  
+  Benvenuto al supporto tecnico del bot.
+
+  <b>Comandi disponibili:</b>
+
+  /newbot - Aggiungi un nuovo bot.
+  /mybots - Mostra i bot.
+
+  /language - Cambia lingua.
+
+  Il tuo ID è: <code>{{owner._id}}</code>.
+
+  Per il supporto tecnico e per vedere come funziona in tempo reale, contatta @RocketBotsBot.
+
+  Notizie e aggiornamenti: @RocketBotsNews.
+
+common:
+  btn:
+    new: |
+      🆕 Nuovo
+    refresh: |
+      🔄 Aggiorna
+    addbtns: |
+      ⌨ Aggiungi tastiera
+    delbtns: |
+      ️❌ Rimuovi tastiera
+    preview: |
+      👀 Anteprime link: {%if preview%}On{%else%}Off{%endif%}
+    up: |
+      ⬆️
+    down: |
+      ⬇️
+    delete: |
+      ❌ Rimuovi
+    back: |
+      ↩️
+  keyboard:
+      set: |
+      🔹 Inviami la tastiera da aggiungere al post nel seguente formato:
+
+      <code>Didascalia  = https://example.com/</code>
+
+      Puoi utilizzare da <b>1</b> a <b>12</b> pulsanti.
+
+      Per annullare, usa /cancel.
+    toomany: |
+      🔹 Troppi pulsanti.
+
+      Puoi utilizzare da <b>1</b> a <b>12</b> pulsanti.
+    error: |
+      🔹 Si è verificato un errore durante l'impostazione della tastiera, probabilmente a causa di un formato non valido.
+      {%if error%}
+      <code>{{error}}</code>
+      {%endif%}
+
+      Prova a correggere il formato e invia di nuovo la tua tastiera o usa /cancel.
+    saved: |
+      🔹 La tastiera è stata salvata.
+  langname: |
+    🇮🇹 Italiano
+  cancelled: |
+    🔹 Annullato. Cosa vuoi fare ora?
+  unknown: |
+    🔹 Comando sconosciuto.
+    Forse  /help?
+  unknown_bot: |
+    🔹 Bot sconosciuto.
+
+lang:
+  text: |
+    🔹 Al momento sto parlando con te in inglese. A quale lingua vuoi che cambi?
+
+    ❓ Cambiare la lingua non influisce sulla lingua dei bot già creati.
+
+    Puoi cambiare la lingua dei bot già creati nelle impostazioni di questo bot.
+
+    <i>Se vuoi parlare con il bot nella tua lingua, puoi tradurlo qui:</i>
+
+    https://github.com/vd2org/lastsupport-templates
+  ok: |
+    🔹 Ora in italiano.
+
+mybots:
+  bots: |
+    🔹 I tuoi bot:
+  nobots: |
+    🔹 Non hai nessun bot.
+
+    Per aggiungere un nuovo bot usa /newbot.
+  bot: |
+    {%if bot.active%}🎾{%else%}🏐️{%endif%} {{bot.username}}
+
+newbot:
+  token: |
+    🔸 Aggiunta di un nuovo bot.
+
+    Per iniziare, devi creare un nuovo bot da @BotFather.
+
+    Inviami il token o inoltra semplicemente il messaggio con il token da BotFather.
+
+    Per annullare l'aggiunta di un bot, clicca su /cancel.
+  fail: |
+    🔸 ⚠️ Impossibile autorizzare il tuo bot.
+
+    Verifica il token inviato e riprova.
+
+    Per annullare l'aggiunta di un bot, clicca su /cancel.
+  exist: |
+    🔸 ⚠️ Questo bot è già registrato qui.
+
+    Non puoi aggiungere lo stesso bot due volte.
+
+    Per annullare l'aggiunta di un bot, clicca su /cancel.
+  ok: |
+    🔸 Bot @{{bot.username}} verificato e aggiunto.
+
+    Ora puoi configurarlo.
+
+manage:
+  text: |
+    @{{bot.username}}
+
+    Stato: {%if bot.active%}🎾 In esecuzione{%else%}🏐️ Spento{%endif%}
+    Creato: {{bot.created|elapsed}}
+    Lingua: {{bot.language}}
+
+    Utenti: {{bot.users_count}}
+
+    Gruppo: {%if bot.group%}{%if bot.group.link%}<a href="{{bot.group.link}}">{{bot.group.title|escape}}</a>{%else%}{{bot.group.title|escape}}{%endif%}{%else%}<i>Nessuno</i>{%endif%}
+  language:
+    language: |
+      🌏 Lingua
+    text: |
+      🔹 Lingua per @{{bot.username}}.
+
+      Lingua attuale: {{bot.language}}
+
+      ❓ Cambiare la lingua non influisce sulla lingua del design del bot, così come sugli altri bot creati.
+  start:
+    start: |
+      ▶️ Avvia
+    started:
+      🔸 Bot @{{bot.username}} è stato avviato. In pochi secondi inizierà a funzionare.
+    already: |
+      🔸 Bot @{{bot.username}} è già avviato e in funzione.
+  stop:
+    stop: |
+      ⏹ Arresta
+    stopped: |
+      🔸 Bot @{{bot.username}} è stato arrestato. Non elaborerà più i messaggi.
+    already: |
+      🔸 Bot @{{bot.username}} è già arrestato.
+  group:
+    group: |
+      👫 Impostazioni del gruppo
+    text: |
+      🔹 Puoi aggiungere @{{bot.username}} al gruppo per rispondere ai messaggi non solo a te, ma a tutti i membri del gruppo.
+
+      Aggiungi il bot al gruppo ed esegui il comando /authorize@{{bot.username}}.
+
+      ⚠️ Un bot può lavorare in un solo gruppo alla volta. Puoi aggiungere diversi bot diversi allo stesso gruppo.
+
+      Il tuo gruppo: {%if bot.group%}{%if bot.group.link%}<a href="{{bot.group.link}}">{{bot.group.title|escape}}</a>{%else%}{{bot.group.title|escape}}{%endif%}{%else%}<i>Non impostato</i>{%endif%}
+    leave: |
+      🚶 Disattiva e lascia
+    leaved: |
+      ⚠️ Il bot è stato rimosso dal gruppo.
+  types:
+    btn: |
+      💬 Tipi di messaggio
+    text: |
+      🔹 Impostazioni dei tipi di messaggio per @{{bot.username}}.
+
+      ❓ Utilizza il ritardo se gli utenti inviano messaggi tramite bot inline difettosi.
+
+      Qui puoi scegliere i tipi di messaggi che gli utenti possono inviare al tuo bot.
+    types:
+      text: |
+        {%if 'text' in bot.types%}✅{%else%}❌{%endif%} 📝 Testi
+      audio: |
+        {%if 'audio' in bot.types%}✅{%else%}❌{%endif%} 💽 Audios
+      document: |
+        {%if 'document' in bot.types%}✅{%else%}❌{%endif%} 📃 Documenti
+      animation: |
+        {%if 'animation' in bot.types%}✅{%else%}❌{%endif%} 🐈 Animazioni
+      photo: |
+        {%if 'photo' in bot.types%}✅{%else%}❌{%endif%} 🖼️ Foto
+      sticker: |
+        {%if 'sticker' in bot.types%}✅{%else%}❌{%endif%} ❤️ Sticker
+      video: |
+        {%if 'video' in bot.types%}✅{%else%}❌{%endif%} 📺 Video
+      voice: |
+        {%if 'voice' in bot.types%}✅{%else%}❌{%endif%} 🎧 Vocali
+      video_note: |
+        {%if 'video_note' in bot.types%}✅{%else%}❌{%endif%} 🤳 Videonote
+      contact: |
+        {%if 'contact' in bot.types%}✅{%else%}❌{%endif%} 📇 Contatti
+      location: |
+        {%if 'location' in bot.types%}✅{%else%}❌{%endif%} 🛰️ Posizioni
+      venue: |
+        {%if 'venue' in bot.types%}✅{%else%}❌{%endif%} 🏬 Luoghi
+      links: |
+        {%if bot.allow_links%}✅{%else%}❌{%endif%} 🔗 Link
+      forwards: |
+        {%if bot.allow_forwards%}✅{%else%}❌{%endif%} ↪️ Consenti inoltro
+      delay: |
+        {%if bot.message_delay%}✅{%else%}❌{%endif%} ⏸ Ritardo
+  messages: |
+    📝 Impostazioni dei messaggi
+  export:
+    btn: |
+      ⏬ Esporta
+    text: |
+      🔹 Esporta per @{{bot.username}}
+      {%if not export%}
+      Nulla è stato ancora esportato. 😓
+      {%else%}
+      L'ultima esportazione è stata richiesta {{export.created | elapsed}} fa.
+
+      Stato: <b>{{export.state|upper}}</b>
+      {%endif%}
+    request: |
+      ⏬ Richiedi esportazione
+    wait: |
+      ⚠️ Attendi per favore {{to | remaining}} per la prossima richiesta.
+    only_one: |
+      ⚠️ Può essere attiva solo un'esportazione alla volta.
+
+broadcast: |
+    🎙️ Trasmissione
+  qreplies: |
+    🗣 Risposte rapide
+  token:
+    btn: |
+      🔑 Cambia token
+    active: |
+      ⚠️  Devi fermare il bot prima di aggiornare il token!
+    enter: |
+      🔸 Aggiornamento del token del bot.
+
+      Inviami il token o semplicemente inoltra il messaggio con il token da BotFather.
+
+      Per annullare l'aggiornamento fai clic su /cancella.
+    otherbot: |
+      🔸 ⚠️ YNon puoi utilizzare il token di un altro bot.
+
+      Controlla il token inviato e riprova.
+
+      Per annullal'aggiornamento fai clic su /cancella.
+    updated: |
+      🔸 Il token è stato aggiornato correttamente.
+  delete:
+    text: |
+      🔸 Rimuovi @{{bot.username}} dal sistema?
+
+      ⚠️ <b>Attenzione!</b> Ciò rimuoverà le impostazioni, le statistiche dei log e tutti i dati associati al bot!
+
+      ⚠️ <b>Attenzione!</b> Questa azione non può essere annullata!
+      {%if step=='two'%}
+      <b>📛📛📛 Sei sicuro?!</b>{%endif%}
+    deleted: |
+      🔸 @{{bot.username}} eliminato dal sistema.
+    positives:
+      1: Si.
+      2: Si, sono sicuro!
+    negatives:
+      1: No!
+      2: Assolutamente no!
+      3: Mai!
+      4: Ho cambiato idea!
+      5: La prossima volta!
+      6: No! No! No!
+      7: Mai!
+      8: È un errore!
+  transfer:
+    btn: |
+      ⏩️ Trasferisci
+    text: |
+      🔸 Trasferisci @{{bot.username}}.
+      {%if new_owner%}
+      <b>Il bot verrà trasferito a <code>{{new_owner._id}}</code>!</b>
+      {%endif%}
+      ⚠️ <b>Attenzione!</b> Il bot verrà trasferito a un altro account!
+
+      ⚠️ <b>Attenzione!</b> Questa azione non può essere annullata!
+      {%if step=='zero'%}
+      Per annullare il trasferimento fai clic su /cancella.
+      
+      ❓ L'ID può essere visualizzato con il comando <code>/start</code>. Il nuovo proprietario deve fornirvi il suo ID.
+      
+      <b>Inserisci l'ID dell'utente a cui trasferire il bot:</b>{%endif%}
+      {%if step=='two'%}
+      <b>📛📛📛 <b>Sei sicuro?!</b>{%endif%}
+    wrong: |
+      🔸 ID utente errato.
+      
+      Per annullare il trasferimento, fare clic su /annulla.
+
+      <b>Inserisci l'ID dell'utente a cui trasferire il bot:</b>
+    proceed: |
+      ⏩️ Procedi al trasferimento..
+    write: |
+      🔸 <b>Il nuovo proprietario deve prima scrivere a questo bot!</b>
+    transferred: |
+      🔸 @{{bot.username}} viene trasferito a {%if mew_owner%}<code>{{mew_owner._id}}</code>{%else%}tu{%endif%}!
+  auth: |
+    ‼️‼️ Il tuo bot @{{bot.username}} è stato arrestato a causa di un errore di autorizzazione.
+
+    Per continuare a lavorare dovresti aggiornare la chiave API del bot.
+
+group:
+  welcome: |
+    🔹 CIAO! Sono un bot del supporto tecnico.
+
+    Per autorizzarmi in questo gruppo, il proprietario del bot deve eseguire il comando /authorize@{{bot.username}}.
+  auth:
+    ok: |
+      🔹 Il bot è stato autorizzato. Ora i messaggi arriveranno a questo gruppo.
+
+      Per la guida sui comandi, fare clic su /help.
+    already: |
+      🔹 Questo bot è già autorizzato in questo gruppo.
+    other: |
+      🔹 Il bot è autorizzato in un altro gruppo.
+    deny: |
+      🔹 ⚠️ Solo il proprietario del bot può autorizzarlo.
+    removed: |
+      🔹 Autorizzazione cancellata.
+  channel: |
+    🔹 ⚠️ Questo bot non è destinato all'uso nei canali!
+
+member:
+  btn:
+    close: |
+      ❌
+    user: |
+      🙇‍♂️ Utente
+    ban: |
+      🚷 Ban
+    unban: |
+      🦾 Unban
+    deleteall: |
+      🚫 Cancella tutto
+    past_msg: |
+      ⤴️
+    digest: |
+      📃 Sintesi
+    fwd_info: |
+      ➡️
+  help: |
+    🔹 Come si usa?
+
+    I messaggi degli utenti del tuo bot verranno inviati qui.
+
+    Per rispondere all'utente, devi rispondere al messaggio inoltrato.
+
+    /info in risposta al messaggio dell'utente mostra informazioni sull'utente e le sue impostazioni.
+  fail: |
+    🔹 ⚠️ Non riesco a ottenere informazioni sull'utente. Messaggio non inviato.
+  bot_baned: |
+    🔹 ⚠️ L'utente ha bloccato il bot. Messaggio non inviato.
+  failcmd: |
+    🔹 ⚠️ Non riesco a ottenere informazioni su questo messaggio.
+  info: |
+    {{request.user.id | er}} <a href="tg://user?id={{request.user.id}}">&{{request.user.id}}</a> {{request.user.first_name | escape}}{%if request.user.last_name%} {{request.user.last_name | escape}}{%endif%}
+  userfail: |
+    🔹 ⚠️ Impossibile ottenere informazioni sull'utente.
+  user: |
+    {{user.user_id | er}} <a href="tg://user?id={{user.user_id}}">&{{user.user_id}}</a> {{user.first_name | escape}}{%if user.last_name%} {{user.last_name | escape}}{%endif%}
+
+    {%if user.username%}<b>🗣 Username</b>: @{{user.username}}{%endif%}
+    <b>🌎 Lingua</b>: {{user.language_code}}
+    <b>🗽 Creato:</b> {{user.created|elapsed}} <b>ago</b>
+    <b>🕐 Ultimo messaggio:</b> {{user.last_message|elapsed}} <b>ago</b>
+    <b>📥 Messaggi</b>: {{requests}}
+    <b>📤 Risposte</b>: {{responses}}
+
+    {%if user.is_banned%}<b>⚠️ Bannato!</b>{%endif%}
+  ban: |
+    🔹 L'utente è {% if user.is_banned%}⚠️ bannato{%else%}unbanned{%endif%}!
+  digest: |
+    🔹 Sintesi per {{user.user_id|er}} <a href="tg://user?id={{user.user_id}}">&{{user.user_id}}</a> {{user.first_name | escape}}{%if user.last_name%} {{user.last_name | escape}}{%endif%}:
+    {%for msg in msgs%}
+    [{%if msg.msg_link_url%}<a href="{{msg.msg_link_url}}">{%endif%}{{msg.time|elapsed}}{%if msg.msg_link_url%}</a>{%endif%}] {%if msg.is_response%}🗣{%else%}{{user.user_id|er}}{%endif%}: {%if msg.msg.type == 'text'%}{{msg.msg.text|untag|crop}}{%else%}🏞 Media{%endif%}{%endfor%}
+  fwd_info: |
+    🔹 Il messaggio è stato inoltrato da{%if fwd.channel%} il canale{%elif fwd.bot%} il bot{%elif fwd.hidden%} un profilo nascosto{%endif%}:
+
+    {%if fwd.user_id%}{{fwd.user_id | er}} <a href="tg://user?id={{fwd.user_id}}">&{{fwd.user_id}}</a>{%if fwd.first_name%} {{fwd.first_name | escape}}{%endif%}{%if fwd.last_name%} {{fwd.last_name | escape}}{%endif%}
+    {%endif-%}
+    {%if fwd.username%}<b>🗣 Username</b>: @{{fwd.username}}
+    {%endif-%}
+    {%if fwd.sender_name%}<b>🗣 Nome del mittente</b>: {{fwd.sender_name | escape}}
+    {%endif-%}
+    {%if fwd.signature%}<b>🗣 Firma</b>: {{fwd.signature | escape}}
+    {%endif-%}
+    {%if fwd.language_code %}<b>🌎 Lingua</b>: {{fwd.language_code}}
+    {%endif-%}
+
+user:
+  welcome: |
+    🔹 benvenuto!
+
+    Invia qui un messaggio e verrà inviato al gruppo di supporto tecnico.
+  sent: |
+    🔸 Il messaggio è stato inviato.
+  forward: |
+    🔹 ⚠️ Vieta di inoltrare messaggi qui.
+  links: |
+    🔹 ⚠️ Vietare di inviare messaggi con collegamenti qui.
+  type: |
+    🔹 ⚠️ Il messaggio non è stato inviato
+
+    È possibile inviare i seguenti tipi di messaggi:
+
+    $types
+  types: |
+    {%if 'text' in bot.types%}📝 Testo{{'\n'}}{%endif-%}
+    {%if 'audio' in bot.types%}💽 Audio{{'\n'}}{%endif-%}
+    {%if 'document' in bot.types%}📃 Documenti{{'\n'}}{%endif-%}
+    {%if 'animation' in bot.types%}🐈 Animazioni{{'\n'}}{%endif-%}
+    {%if 'photo' in bot.types%}🖼️ Foto{{'\n'}}{%endif-%}
+    {%if 'sticker' in bot.types%}❤️ Stickers{{'\n'}}{%endif-%}
+    {%if 'video' in bot.types%}📺 Video{{'\n'}}{%endif-%}
+    {%if 'voice' in bot.types%}🎧 Vocali{{'\n'}}{%endif-%}
+    {%if 'video_note' in bot.types%}🤳 Videonote{{'\n'}}{%endif-%}
+    {%if 'contact' in bot.types%}📇 Contatti{{'\n'}}{%endif-%}
+    {%if 'location' in bot.types%}🛰️ Posizioni{{'\n'}}{%endif-%}
+    {%if 'venue' in bot.types%}🏬 Luoghi{%endif-%}
+
+messages:
+  text: |
+    🔹 Impostazioni dei messaggi per @{{bot.username}}.
+
+    In questa sezione puoi impostare i tuoi messaggi per gli utenti.
+
+    ❓ È possibile impostare l'ora dopo la quale l'utente riceverà nuovamente una notifica dopo che il messaggio è stato inviato.
+    ❓ Le seguenti variabili possono essere utilizzate in tutti i messaggi:
+       ▪️ <code>$first_name</code> - il nome dell'utente
+       ▪️ <code>$last_name</code> - il cognome dell'utente
+       ▪️ <code>$full_name</code> - nome+cognome
+       ▪️ <code>$types</code> - elenco dei tipi di messaggio supportati
+
+    🔹 Seleziona il messaggio appropriato dal basso e poi puoi modificarlo o restituire quello standard.
+  edition: |
+    🔹 La modifica `{{T('messages/select/'+selected)}}` per @{{bot.username}}.
+
+    Invia un nuovo messaggio e verrà salvato.
+    Per annullare la modifica, fare clic su /cancel.
+  error: |
+    🔹 Si è verificato un errore durante l'invio del messaggio, probabilmente a causa della formattazione non valida.
+
+    <code>{{error}}</code>
+
+    🔹 Correggi la formattazione e invia nuovamente il messaggio.
+
+    🔹 Per annullare la modifica, fare clic su /cancel.
+  edit: |
+    ✍️ Modificare
+  revert: |
+    🔙 Ripristina
+  sent:
+    header: |
+      🕔 Ripeti ogni:
+    value: |
+      {%if bot.sent_delay == 0%}Ogni{%else%}{{bot.sent_delay}}m{%endif%}
+    minus: |
+      ⏪
+    plus: |
+      ⏩
+  select:
+    welcome: |
+      {%if selected%}🔺️ {%endif%}👋 Benvenuto
+    sent: |
+      {%if selected%}🔺️ {%endif%}📨 Invia
+    forward: |
+      {%if selected%}🔺️ {%endif%}⏩ Inoltrare
+    links: |
+      {%if selected%}🔺️ {%endif%}🔗 Links
+    type: |
+      {%if selected%}🔺️ {%endif%}🆎 Tipo
+
+broadcast:
+  btn:
+    view: |
+      👀 Visualizza
+    start: |
+      ▶️ Avvia
+    pause: |
+      ⏸ Pausa
+    cancel: |
+      ❌ Cancella
+    archive: |
+      📚 Archivia
+
+  states:
+    new: |
+      🆕 NUOVO
+    started: |
+      ▶️ AVVIA
+    paused: |
+      ⏸ IN PAUSA
+    cancelled: |
+      ❌ ANNULLATO
+    finished: |
+      ☑️ FINITO
+  unknown: |
+    🔸 Trasmissione sconosciuta!
+  exist: |
+    🔸 È possibile creare una sola trasmissione attiva!
+  main: |
+    🔹 Trasmissione per @{{bot.username}}
+    {%if current%}
+    Boradcast: #{{current._id}}
+    Creato: <b>{{current.created|elapsed}}</b>{%if current.started%}
+    Iniziato: <b>{{current.started|elapsed(show_seconds=True)}}</b>{%endif%}{%if current.finished%}
+    Finito: <b>{{current.finished|elapsed}}</b>{%endif%}
+
+    <b>{{T('broadcast/states/'+current.state)}}</b>{%if stat%}
+
+    Inviato: <b>{{stat.sent}}</b> of <b>{{stat.total}}</b>
+    Errori: <b>{{stat.errors}}</b>{%endif%}
+    {%else%}
+    Nessuna trasmissione attiva.
+
+    ❓ È possibile creare una sola trasmissione attiva alla volta.
+
+    ❓ L'elaborazione dei comandi di trasmissione (avvio, pausa, arresto) può richiedere fino a un minuto.
+
+    ❓ Le trasmissioni terminate verranno spostate nell'archivio.
+    {%endif%}
+  archive: |
+    🔹 Archivio trasmissioni per @{{bot.username}}
+  new: |
+    🔸 Nuova trasmissione per @{{bot.username}}
+
+    Inviami un nuovo messaggio o premi /annulla.
+  notsupport: |
+    🔸 Il bot supporta solo messaggi di testo. Riprova o premi /annulla.
+  error: |
+    🔹 Si è verificato un errore durante la creazione del post, probabilmente a causa della formattazione non valida.
+
+    <code>{{error}}</code>
+
+    🔹 Prova a correggere la formattazione e invia nuovamente il tuo post oppure premi /annulla.
+  created: |
+    🔸 La tua nuova trasmissione è stata creata.
+  cancelled: |
+    🔸 La tua nuova trasmissione #{{broadcast._id}} è stata cancellata.
+  started: |
+    🔸 La tua trasmissione #{{broadcast._id}} è stata avviata.
+  paused: |
+    🔸 La tua trasmissione #{{broadcast._id}} è stata messa in pausa.
+
+qreplies:
+  text: |
+    🔹 Risposte rapide per @{{bot.username}}
+  new: |
+    🔸 Nuova risposta rapida per @{{bot.username}}
+
+    Inviami un nuovo messaggio o premi /annulla.
+  reply: |
+    🔸 Risposta veloce ...
+  not_found: |
+    ⚠️ La risposta rapida non è stata trovata!
+  deleted: |
+    🔹 La risposta rapida viene eliminata.
+
+captcha:
+  btn:
+    manage: |
+      🥊 Captcha
+    toggle: |
+      {%if not bot.captcha.enabled%}🎾 Abilitare{%else%}🏐 Disattivare{%endif%}
+    reset: |
+      🔄 Reimposta utenti
+  text: |
+    🔹 Impostazioni captcha per @{{bot.username}}
+    
+    Stato attuale: {%if bot.captcha.enabled%}🎾Abilitato{%else%}🏐️Disabilitato{%endif%}
+    
+    ❓ Il pulsante "🔄 Reimposta utenti" abiliterà il captcha per tutti gli utenti esistenti.
+  new: |
+    🔸 Nuovo captcha per @{{bot.username}}
+    {%if error%}
+    ⚠️ Si è verificato un errore durante la creazione del captcha probabilmente a causa di una formattazione non valida.
+
+    <b>Error:</b> <code>{{error}}</code>
+    {%endif%}
+    ❓ Il messaggio deve contenere una domanda e l'elenco delle risposte. Le domande e le risposte devono essere separate da <b>due</b> righe vuote!
+    ❓ Devono esserci almeno <b>due</b> risposte. La prima risposta deve essere quella corretta!
+    
+    ❓ Esempio
+    
+    <code>Domanda molto difficile?
+    
+    
+    Risposta esatta
+    Risposta sbagliata 1
+    Risposta sbagliata 2
+    Risposta sbagliata 3
+    Risposta sbagliata 4</code>
+    
+    Oppure premere /cancel per annullare.
+  deleted: |
+    🔹 Il captcha è stato eliminato
+  reset: |
+    🔹 Tutti gli utenti sono stati reimpostati.
+  no_questions: |
+    ⚠️ Devi aggiungere almeno un captcha!
+  must: |
+    ⚠️ Devi prima passare il captcha tramite il comando /start.
+  failed: |
+    ⚠️ Risposta sbagliata!
+  passed: |
+    😊 Hai superato il captcha!
